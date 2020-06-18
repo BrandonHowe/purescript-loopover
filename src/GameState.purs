@@ -36,7 +36,7 @@ cycleRow arr row left = fromMaybe arr do
   updateAt row cycled arr
 
 genColumn :: GameState -> Int -> Maybe (Array Int)
-genColumn state col = sequence $ (\x -> x !! col) <$> state
+genColumn state col = sequence $ (_ !! col) <$> state
 
 cycleCol :: GameState -> Int -> Boolean -> GameState
 cycleCol arr row up = fromMaybe arr (join $ sequence <$> (unwrap $ (uncurry (\x y -> updateAt row y x) <$> Compose (zip arr <$> (cycleArr' up <$> genColumn arr row)))))
